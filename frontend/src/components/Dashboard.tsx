@@ -127,9 +127,9 @@ export default function Dashboard() {
 
   return (
     <div className="mx-auto max-w-7xl">
-      <div className="mb-8 flex items-start justify-between">
+      <div className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
         <div>
-          <h1 className="text-[28px] font-bold text-[#1F2937] dark:text-[#F9FAFB] mb-2">
+          <h1 className="text-[24px] md:text-[28px] font-bold text-[#1F2937] dark:text-[#F9FAFB] mb-2">
             Monitoring & Reporting Dashboard
           </h1>
           <p className="text-[14px] text-[#4B5563] dark:text-[#D1D5DB]">
@@ -139,17 +139,19 @@ export default function Dashboard() {
         <div className="flex gap-2">
           <Button
             variant="outline"
-            className="h-9 text-[14px] border-[#E5E7EB] dark:border-[#374151]"
+            className="h-9 text-[12px] md:text-[14px] border-[#E5E7EB] dark:border-[#374151]"
           >
-            <Download className="h-4 w-4 mr-2" />
-            Export PDF
+            <Download className="h-4 w-4 md:mr-2" />
+            <span className="hidden md:inline">Export PDF</span>
+            <span className="md:hidden">PDF</span>
           </Button>
           <Button
             variant="outline"
-            className="h-9 text-[14px] border-[#E5E7EB] dark:border-[#374151]"
+            className="h-9 text-[12px] md:text-[14px] border-[#E5E7EB] dark:border-[#374151]"
           >
-            <Download className="h-4 w-4 mr-2" />
-            Export Excel
+            <Download className="h-4 w-4 md:mr-2" />
+            <span className="hidden md:inline">Export Excel</span>
+            <span className="md:hidden">Excel</span>
           </Button>
         </div>
       </div>
@@ -233,7 +235,7 @@ export default function Dashboard() {
             </div>
 
             {/* KPI Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {calculatedKPIs.map((kpi, index) => (
                 <KPIWidget
                   key={index}
@@ -245,7 +247,7 @@ export default function Dashboard() {
               ))}
             </div>
             {/* Programme Status Overview */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
               <div className="bg-[#F4F4F4] border border-[#E5E7EB] rounded-[4px] p-6 dark:bg-[#111827] dark:border-[#374151]">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-[20px] font-medium text-[#1F2937] dark:text-[#F9FAFB]">
@@ -260,7 +262,7 @@ export default function Dashboard() {
                     Export
                   </Button>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3 md:gap-4">
                   <div className="bg-white dark:bg-[#1F2937] rounded-[4px] p-4 border border-[#E5E7EB] dark:border-[#374151]">
                     <div className="flex items-center gap-2 mb-2">
                       <CheckCircle2 className="h-4 w-4 text-[#4B5563] dark:text-[#D1D5DB]" />
@@ -362,8 +364,8 @@ export default function Dashboard() {
             </div>
           </TabsContent>
 
-          <TabsContent value="performance" className="space-y-6">
-            <div className="flex items-end justify-between gap-4 mb-6">
+          <TabsContent value="performance" className="space-y-4 md:space-y-6">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-4 md:mb-6">
               <FilterBar
                 selectedDepartment={selectedDepartment}
                 selectedStatus={selectedStatus}
@@ -377,10 +379,10 @@ export default function Dashboard() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="h-10 text-[14px] border-[#E5E7EB] dark:border-[#374151]"
+                  className="h-10 text-[12px] md:text-[14px] border-[#E5E7EB] dark:border-[#374151]"
                 >
-                  <Download className="h-4 w-4 mr-2" />
-                  Export
+                  <Download className="h-4 w-4 md:mr-2" />
+                  <span className="hidden md:inline">Export</span>
                 </Button>
               </div>
             </div>
@@ -468,7 +470,7 @@ export default function Dashboard() {
                   />
                 </ComposedChart>
               </ResponsiveContainer>
-              <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
                 {budgetData.map((dept) => {
                   const variancePercent = ((dept.expenditure / dept.budget) * 100).toFixed(1);
                   const isOver = dept.expenditure > dept.budget;

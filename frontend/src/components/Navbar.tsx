@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Moon, Sun, User, LogOut, Bell, Settings, LogIn } from "lucide-react";
+import { Moon, Sun, User, LogOut, Bell, Settings, LogIn, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,7 +12,11 @@ import {
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useTheme } from "@/contexts/ThemeContext";
 
-export default function Navbar() {
+interface NavbarProps {
+  onMenuClick?: () => void;
+}
+
+export default function Navbar({ onMenuClick }: NavbarProps) {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
@@ -25,21 +29,30 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-[#E5E7EB] bg-white px-6 dark:border-[#374151] dark:bg-[#1F2937]">
-      <div className="flex items-center gap-4">
-        <h2 className="text-[20px] font-semibold text-[#1F2937] dark:text-[#F9FAFB]">
+    <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-[#E5E7EB] bg-white px-4 md:px-6 dark:border-[#374151] dark:bg-[#1F2937]">
+      <div className="flex items-center gap-2 md:gap-4">
+        {/* Mobile Menu Button */}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={onMenuClick}
+          className="lg:hidden text-[#4B5563] hover:bg-[#E5E7EB] dark:text-[#D1D5DB] dark:hover:bg-[#374151]"
+        >
+          <Menu className="h-5 w-5" />
+        </Button>
+        <h2 className="text-[18px] md:text-[20px] font-semibold text-[#1F2937] dark:text-[#F9FAFB]">
           Dashboard
         </h2>
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 md:gap-4">
         <Button
           variant="outline"
           size="sm"
           onClick={handleLogin}
-          className="h-9 text-[14px] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB]"
+          className="h-9 text-[12px] md:text-[14px] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB]"
         >
-          <LogIn className="h-4 w-4 mr-2" />
-          Login
+          <LogIn className="h-4 w-4 md:mr-2" />
+          <span className="hidden md:inline">Login</span>
         </Button>
         <Button
           variant="ghost"

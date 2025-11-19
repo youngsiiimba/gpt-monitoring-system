@@ -22,7 +22,11 @@ const navigation = [
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+  onNavigate?: () => void;
+}
+
+export default function Sidebar({ onNavigate }: SidebarProps) {
   const location = useLocation();
 
   return (
@@ -43,6 +47,7 @@ export default function Sidebar() {
               <Link
                 key={item.name}
                 to={item.href}
+                onClick={onNavigate}
                 className={cn(
                   "flex items-center gap-3 rounded-[4px] px-3 py-2 text-[14px] font-medium transition-colors",
                   isActive

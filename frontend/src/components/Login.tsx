@@ -28,7 +28,7 @@ export default function Login() {
   return (
     <div className="flex min-h-screen bg-white dark:bg-[#1F2937]">
       {/* Left side - Branding */}
-      <div className="hidden lg:flex lg:w-1/2 bg-[#F4F4F4] dark:bg-[#111827] items-center justify-center p-12">
+      <div className="hidden lg:flex lg:w-1/2 bg-[#F4F4F4] dark:bg-[#111827] items-center justify-center p-8 lg:p-12">
         <div className="max-w-md">
           <div className="mb-8">
             <Building2 className="h-12 w-12 text-[#1F2937] dark:text-[#F9FAFB] mb-4" />
@@ -56,8 +56,8 @@ export default function Login() {
       </div>
 
       {/* Right side - Login Form */}
-      <div className="flex-1 flex items-center justify-center p-8">
-        <Card className="w-full max-w-md p-8 dark:bg-[#111827] dark:border-[#374151]">
+      <div className="flex-1 flex items-center justify-center p-4 md:p-8">
+        <Card className="w-full max-w-md p-6 md:p-8 dark:bg-[#111827] dark:border-[#374151]">
           <div className="mb-8">
             <h2 className="text-[28px] font-bold text-[#1F2937] dark:text-[#F9FAFB] mb-2">
               Welcome Back
