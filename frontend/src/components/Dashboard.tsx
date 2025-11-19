@@ -428,7 +428,14 @@ export default function Dashboard() {
                     yAxisId="left"
                     stroke="#4B5563"
                     style={{ fontSize: "12px" }}
-                    tickFormatter={(value) => `R${(value / 1000000).toFixed(1)}M`}
+                    tickFormatter={(value) => {
+                      if (value >= 1000000000) {
+                        return `R${(value / 1000000000).toFixed(1)}B`;
+                      } else if (value >= 1000000) {
+                        return `R${(value / 1000000).toFixed(0)}M`;
+                      }
+                      return `R${(value / 1000).toFixed(0)}K`;
+                    }}
                   />
                   <Tooltip
                     contentStyle={{
@@ -436,7 +443,14 @@ export default function Dashboard() {
                       border: "1px solid #E5E7EB",
                       borderRadius: "4px",
                     }}
-                    formatter={(value: number) => `R${(value / 1000000).toFixed(2)}M`}
+                    formatter={(value: number) => {
+                      if (value >= 1000000000) {
+                        return `R${(value / 1000000000).toFixed(2)}B`;
+                      } else if (value >= 1000000) {
+                        return `R${(value / 1000000).toFixed(2)}M`;
+                      }
+                      return `R${(value / 1000).toFixed(0)}K`;
+                    }}
                   />
                   <Legend />
                   <Bar
@@ -477,7 +491,9 @@ export default function Dashboard() {
                         )}
                       </div>
                       <div className="text-[12px] text-[#4B5563] dark:text-[#D1D5DB] mt-1">
-                        Variance: R{(Math.abs(dept.variance) / 1000000).toFixed(2)}M
+                        Variance: {dept.variance >= 0 ? "+" : "-"}R{Math.abs(dept.variance) >= 1000000000 
+                          ? (Math.abs(dept.variance) / 1000000000).toFixed(2) + "B"
+                          : (Math.abs(dept.variance) / 1000000).toFixed(2) + "M"}
                       </div>
                     </div>
                   );
@@ -594,12 +610,20 @@ export default function Dashboard() {
                 <span className="text-[16px] text-[#1F2937] dark:text-[#F9FAFB]">{selectedProject.department}</span>
               </div>
               <div>
+                <span className="text-[14px] font-medium text-[#4B5563] dark:text-[#D1D5DB]">Indicator: </span>
+                <span className="text-[16px] text-[#1F2937] dark:text-[#F9FAFB]">{selectedProject.indicator}</span>
+              </div>
+              <div>
+                <span className="text-[14px] font-medium text-[#4B5563] dark:text-[#D1D5DB]">Quarter: </span>
+                <span className="text-[16px] text-[#1F2937] dark:text-[#F9FAFB]">{selectedProject.quarter}</span>
+              </div>
+              <div>
                 <span className="text-[14px] font-medium text-[#4B5563] dark:text-[#D1D5DB]">Target: </span>
-                <span className="text-[16px] text-[#1F2937] dark:text-[#F9FAFB]">{selectedProject.target}</span>
+                <span className="text-[16px] text-[#1F2937] dark:text-[#F9FAFB]">{selectedProject.target.toLocaleString()} {selectedProject.unit}</span>
               </div>
               <div>
                 <span className="text-[14px] font-medium text-[#4B5563] dark:text-[#D1D5DB]">Actual: </span>
-                <span className="text-[16px] text-[#1F2937] dark:text-[#F9FAFB]">{selectedProject.actual}</span>
+                <span className="text-[16px] text-[#1F2937] dark:text-[#F9FAFB]">{selectedProject.actual.toLocaleString()} {selectedProject.unit}</span>
               </div>
               <div>
                 <span className="text-[14px] font-medium text-[#4B5563] dark:text-[#D1D5DB]">Status: </span>

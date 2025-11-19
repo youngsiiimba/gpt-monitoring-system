@@ -28,10 +28,13 @@ export default function ProjectTable({ projects, onRowClick }: ProjectTableProps
         <thead>
           <tr className="border-b border-[#E5E7EB] dark:border-[#374151]">
             <th className="text-left py-3 px-3 text-[16px] font-bold text-[#1F2937] dark:text-[#F9FAFB]">
-              Project Name
+              Programme
             </th>
             <th className="text-left py-3 px-3 text-[16px] font-bold text-[#1F2937] dark:text-[#F9FAFB]">
               Department
+            </th>
+            <th className="text-left py-3 px-3 text-[16px] font-bold text-[#1F2937] dark:text-[#F9FAFB]">
+              Indicator
             </th>
             <th className="text-right py-3 px-3 text-[16px] font-bold text-[#1F2937] dark:text-[#F9FAFB]">
               Target
@@ -58,13 +61,16 @@ export default function ProjectTable({ projects, onRowClick }: ProjectTableProps
               onMouseLeave={() => setHoveredRow(null)}
               onClick={() => onRowClick?.(project)}
             >
-              <td className="py-3 px-3 text-[16px] text-[#4B5563] dark:text-[#D1D5DB]">{project.name}</td>
+              <td className="py-3 px-3 text-[16px] text-[#4B5563] dark:text-[#D1D5DB] font-medium">{project.name}</td>
               <td className="py-3 px-3 text-[16px] text-[#4B5563] dark:text-[#D1D5DB]">{project.department}</td>
-              <td className="py-3 px-3 text-[16px] text-[#4B5563] dark:text-[#D1D5DB] text-right">
-                {project.target}
+              <td className="py-3 px-3 text-[14px] text-[#4B5563] dark:text-[#D1D5DB] max-w-xs truncate" title={project.indicator}>
+                {project.indicator}
               </td>
               <td className="py-3 px-3 text-[16px] text-[#4B5563] dark:text-[#D1D5DB] text-right">
-                {project.actual}
+                {project.target.toLocaleString()} {project.unit}
+              </td>
+              <td className="py-3 px-3 text-[16px] text-[#4B5563] dark:text-[#D1D5DB] text-right">
+                {project.actual.toLocaleString()} {project.unit}
               </td>
               <td className="py-3 px-3 text-[16px] text-[#4B5563] dark:text-[#D1D5DB]">
                 <span style={{ color: getStatusColor(project.status) }}>
