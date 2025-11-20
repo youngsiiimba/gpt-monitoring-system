@@ -1,6 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { Moon, Sun, User, LogOut, Bell, Settings, LogIn, Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "./ui/avatar.tsx";
+import { Button } from "./ui/button.tsx";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,9 +7,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { useTheme } from "@/contexts/ThemeContext";
+} from "./ui/dropdown-menu.tsx";
+import { useTheme } from "../contexts/ThemeContext.tsx";
+import { Bell, LogOut, Menu, Moon, Settings, Sun, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface NavbarProps {
   onMenuClick?: () => void;
@@ -46,12 +46,11 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
       </div>
       <div className="flex items-center gap-2 md:gap-4">
         <Button
-          variant="outline"
+          variant="link"
           size="sm"
           onClick={handleLogin}
           className="h-9 text-[12px] md:text-[14px] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB]"
         >
-          <LogIn className="h-4 w-4 md:mr-2" />
           <span className="hidden md:inline">Login</span>
         </Button>
         <Button
