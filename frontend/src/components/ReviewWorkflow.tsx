@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { workflowItems, type WorkflowItem, type WorkflowStatus } from "@/data/mockData";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -29,6 +29,12 @@ const statusConfig: Record<WorkflowStatus, { label: string; color: string; icon:
 };
 
 export default function ReviewWorkflow() {
+  useEffect(() => {
+    const dismissed = localStorage.getItem("mrs_onboarding_dismissed");
+    if (!dismissed) {
+      window.dispatchEvent(new CustomEvent("openOnboarding", { detail: { page: "review" } }));
+    }
+  }, []);
   const [selectedItem, setSelectedItem] = useState<WorkflowItem | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [reviewComment, setReviewComment] = useState("");
@@ -79,10 +85,11 @@ export default function ReviewWorkflow() {
         <p className="text-[14px] text-[#4B5563] dark:text-[#D1D5DB]">
           Manage quarterly report submissions, reviews, and approvals
         </p>
+        
       </div>
 
       {/* Status Filter */}
-      <div className="mb-6 flex flex-wrap gap-2">
+      <div className="mb-6 flex flex-wrap gap-2" data-onboarding="review.filters">
         <Button
           variant={filterStatus === "all" ? "default" : "outline"}
           size="sm"

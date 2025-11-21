@@ -23,6 +23,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Download, AlertCircle, TrendingUp, TrendingDown, Clock, CheckCircle2, XCircle, FileText, X } from "lucide-react";
+import Onboarding from "./Onboarding";
 
 export default function Dashboard() {
   const [selectedDepartment, setSelectedDepartment] = useState("all");
@@ -127,6 +128,9 @@ export default function Dashboard() {
 
   return (
     <div className="mx-auto max-w-7xl">
+      <Onboarding />
+      {/* Global anchored callouts for contextual tours */}
+      {/* Mounted in Layout later as well; keeping here for local pages */}
       <div className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
         <div>
           <h1 className="text-[24px] md:text-[28px] font-bold text-[#1F2937] dark:text-[#F9FAFB] mb-2">
@@ -140,6 +144,7 @@ export default function Dashboard() {
           <Button
             variant="outline"
             className="h-9 text-[12px] md:text-[14px] border-[#E5E7EB] dark:border-[#374151]"
+            onClick={() => window.dispatchEvent(new CustomEvent('openOnboarding', { detail: { page: 'overview' } }))}
           >
             <Download className="h-4 w-4 md:mr-2" />
             <span className="hidden md:inline">Export PDF</span>
@@ -148,6 +153,7 @@ export default function Dashboard() {
           <Button
             variant="outline"
             className="h-9 text-[12px] md:text-[14px] border-[#E5E7EB] dark:border-[#374151]"
+            onClick={() => window.dispatchEvent(new CustomEvent('openOnboarding', { detail: { page: 'overview' } }))}
           >
             <Download className="h-4 w-4 md:mr-2" />
             <span className="hidden md:inline">Export Excel</span>
@@ -375,7 +381,7 @@ export default function Dashboard() {
                 onQuarterChange={setSelectedQuarter}
                 departments={departments}
               />
-              <div className="flex gap-2">
+              <div className="flex gap-2 items-center">
                 <Button
                   variant="outline"
                   size="sm"
@@ -384,6 +390,7 @@ export default function Dashboard() {
                   <Download className="h-4 w-4 md:mr-2" />
                   <span className="hidden md:inline">Export</span>
                 </Button>
+                
               </div>
             </div>
             <div className="bg-[#F4F4F4] border border-[#E5E7EB] rounded-[4px] p-4 dark:bg-[#111827] dark:border-[#374151]">
@@ -414,6 +421,7 @@ export default function Dashboard() {
                   <Download className="h-4 w-4 mr-2" />
                   Export Report
                 </Button>
+                
               </div>
               <ResponsiveContainer width="100%" height={350}>
                 <ComposedChart data={budgetData}>

@@ -22,7 +22,7 @@ export default function FilterBar({
 }: FilterBarProps) {
   return (
     <div className="flex flex-wrap gap-3 md:gap-4 items-end flex-1">
-      <div className="flex-1 min-w-[150px] md:min-w-[200px]">
+      <div className="flex-1 min-w-[150px] md:min-w-[200px]" data-onboarding="performance.filter.department">
         <Label className="text-[14px] font-medium text-[#4B5563] dark:text-[#D1D5DB] mb-2 block">
           Department
         </Label>
@@ -40,7 +40,7 @@ export default function FilterBar({
           </SelectContent>
         </Select>
       </div>
-      <div className="flex-1 min-w-[150px] md:min-w-[200px]">
+      <div className="flex-1 min-w-[150px] md:min-w-[200px]" data-onboarding="performance.filter.status">
         <Label className="text-[14px] font-medium text-[#4B5563] dark:text-[#D1D5DB] mb-2 block">
           Status
         </Label>
@@ -56,7 +56,7 @@ export default function FilterBar({
           </SelectContent>
         </Select>
       </div>
-      <div className="flex-1 min-w-[150px] md:min-w-[200px]">
+      <div className="flex-1 min-w-[150px] md:min-w-[200px]" data-onboarding="performance.filter.quarter">
         <Label className="text-[14px] font-medium text-[#4B5563] dark:text-[#D1D5DB] mb-2 block">
           Quarter
         </Label>

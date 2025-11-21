@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { evidenceFiles, type Evidence } from "@/data/mockData";
 import { projects } from "@/data/mockData";
 import { Button } from "@/components/ui/button";
@@ -72,6 +72,13 @@ export default function EvidenceUpload() {
     }
   };
 
+  useEffect(() => {
+    const dismissed = localStorage.getItem("mrs_onboarding_dismissed");
+    if (!dismissed) {
+      window.dispatchEvent(new CustomEvent("openOnboarding", { detail: { page: "evidence" } }));
+    }
+  }, []);
+
   return (
     <div className="mx-auto max-w-7xl">
       <div className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
@@ -83,13 +90,16 @@ export default function EvidenceUpload() {
             Upload and manage evidence documents for programme indicators
           </p>
         </div>
-        <Button
-          onClick={() => setIsUploadDialogOpen(true)}
-          className="h-9 text-[14px] bg-[#1F2937] hover:bg-[#4B5563] text-white"
-        >
-          <Upload className="h-4 w-4 mr-2" />
-          Upload Evidence
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            onClick={() => setIsUploadDialogOpen(true)}
+            className="h-9 text-[14px] bg-[#1F2937] hover:bg-[#4B5563] text-white"
+            data-onboarding="evidence.upload"
+          >
+            <Upload className="h-4 w-4 mr-2" />
+            Upload Evidence
+          </Button>
+        </div>
       </div>
 
       {/* Project Selection */}
@@ -98,9 +108,10 @@ export default function EvidenceUpload() {
           Select Programme
         </Label>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {projects.map((project) => (
+          {projects.map((project, idx) => (
             <Card
               key={project.id}
+              data-onboarding={idx === 0 ? 'evidence.projects' : undefined}
               className={`p-3 border cursor-pointer transition-colors ${
                 selectedProjectId === project.id
                   ? "border-[#1F2937] bg-[#F4F4F4] dark:bg-[#111827]"

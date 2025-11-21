@@ -5,29 +5,25 @@ import { Input } from "./ui/input.tsx";
 import { auditLogs } from "../data/mockData.ts";
 import {
   CheckCircle2,
-  Clock,
-  Eye,
-  FileText,
-  Filter,
-  MessageSquare,
-  Search,
-  Upload,
-  User,
-  XCircle
-} from "lucide-react";
-import { useMemo, useState } from "react";
+  useEffect(() => {
+    const dismissed = localStorage.getItem("mrs_onboarding_dismissed");
+    if (!dismissed) {
+      window.dispatchEvent(new CustomEvent("openOnboarding", { detail: { page: "audit" } }));
+    }
+  }, []);
 
-const actionIcons: Record<string, React.ReactNode> = {
-  "Report Submitted": <FileText className="h-4 w-4 text-blue-600" />,
-  "Report Reviewed": <Eye className="h-4 w-4 text-yellow-600" />,
-  "Report Approved": <CheckCircle2 className="h-4 w-4 text-green-600" />,
-  "Report Rejected": <XCircle className="h-4 w-4 text-red-600" />,
-  "Report Returned": <MessageSquare className="h-4 w-4 text-orange-600" />,
-  "Evidence Uploaded": <Upload className="h-4 w-4 text-purple-600" />,
-  "Review Comment Added": <MessageSquare className="h-4 w-4 text-blue-600" />,
-  "User Login": <User className="h-4 w-4 text-gray-600" />,
-  "Dashboard Accessed": <Eye className="h-4 w-4 text-gray-600" />,
-};
+  return (
+    <div className="mx-auto max-w-7xl">
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-[24px] md:text-[28px] font-bold text-[#1F2937] dark:text-[#F9FAFB] mb-2">
+          Audit Trail
+        </h1>
+        <p className="text-[14px] text-[#4B5563] dark:text-[#D1D5DB]">
+          Complete history of all system actions, changes, and user activities
+        </p>
+      </div>
+
+      {/* Filters */}
 
 const roleColors: Record<string, string> = {
   programme_manager: "#3B82F6",
@@ -68,12 +64,23 @@ export default function AuditTrail() {
         <p className="text-[14px] text-[#4B5563] dark:text-[#D1D5DB]">
           Complete history of all system actions, changes, and user activities
         </p>
+        <div className="mt-2">
+          </div>
+        </div>
+
+    useEffect(() => {
+      const dismissed = localStorage.getItem("mrs_onboarding_dismissed");
+      if (!dismissed) {
+        window.dispatchEvent(new CustomEvent("openOnboarding", { detail: { page: "audit" } }));
+      }
+    }, []);
+        </div>
       </div>
 
       {/* Filters */}
       <div className="mb-6 space-y-4">
         <div className="flex flex-col md:flex-row gap-4">
-          <div className="flex-1 relative">
+          <div className="flex-1 relative" data-onboarding="audit.search">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#4B5563] dark:text-[#D1D5DB]" />
             <Input
               type="text"
@@ -86,7 +93,7 @@ export default function AuditTrail() {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2" data-onboarding="audit.filter">
             <Filter className="h-4 w-4 text-[#4B5563] dark:text-[#D1D5DB]" />
             <span className="text-[12px] text-[#4B5563] dark:text-[#D1D5DB]">Action:</span>
             <select

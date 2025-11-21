@@ -121,3 +121,41 @@
     line-height: 1.5;
   }
 }
+
+/* Government theme helpers: conservative, readable, and accessible */
+:root {
+  --gov-green: #1F2937;
+  --gov-yellow: #B7791F;
+  --gov-red: #D63636;
+}
+
+/* Status utility classes */
+.gov-status-green { color: var(--gov-green); }
+.gov-status-yellow { color: var(--gov-yellow); }
+.gov-status-red { color: var(--gov-red); }
+
+/* Table caption for screen readers and visual users */
+.gov-table-caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-muted-foreground);
+  padding: 0 0 0.5rem 0;
+}
+
+/* Focus styles for interactive rows */
+.gov-row-focus:focus {
+  outline: 3px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Make key KPI numbers easier to scan on small screens */
+.gov-kpi-number { font-variant-numeric: tabular-nums; }
+
+/* Onboarding/modal helpers */
+.onboarding-step { padding-left: 0.5rem; }
+.onboarding-em { font-weight: 600; color: var(--color-primary); }
+
+/* POC banner */
+.poc-banner { font-size: 13px; }
+.poc-banner strong { margin-right: 0.5rem; }

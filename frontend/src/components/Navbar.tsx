@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback } from "./ui/avatar.tsx";
 import { Button } from "./ui/button.tsx";
+import { Badge } from "./ui/badge.tsx";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu.tsx";
 import { useTheme } from "../contexts/ThemeContext.tsx";
-import { Bell, LogOut, Menu, Moon, Settings, Sun, User } from "lucide-react";
+import { Bell, LogOut, Menu, Moon, Settings, Sun, User, HelpCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface NavbarProps {
@@ -40,9 +41,14 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
         >
           <Menu className="h-5 w-5" />
         </Button>
-        <h2 className="text-[18px] md:text-[20px] font-semibold text-[#1F2937] dark:text-[#F9FAFB]">
-          Dashboard
-        </h2>
+        <div className="flex items-center gap-3">
+          <h2 className="text-[18px] md:text-[20px] font-semibold text-[#1F2937] dark:text-[#F9FAFB]">
+            Dashboard
+          </h2>
+          <Badge variant="outline" className="text-[11px]" title="Proof of concept: features and designs are subject to change" aria-label="Proof of concept notice">
+            POC
+          </Badge>
+        </div>
       </div>
       <div className="flex items-center gap-2 md:gap-4">
         <Button
@@ -68,9 +74,11 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
         <Button
           variant="ghost"
           size="icon"
+          onClick={() => window.dispatchEvent(new Event("openOnboarding"))}
           className="text-[#4B5563] hover:bg-[#E5E7EB] dark:text-[#D1D5DB] dark:hover:bg-[#374151]"
+          aria-label="Open help tour"
         >
-          <Bell className="h-5 w-5" />
+          <HelpCircle className="h-5 w-5" />
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
